@@ -6,12 +6,12 @@ const router = express.Router();
 
 router.get('/', function (req, res){
 
-    controller.getSerial(req.query)
+    controller.getSerial(req.body.message)
     .then ((fullMsg) => {
         response.success(req, res, fullMsg, 200);
     })
     .catch (() => {
-        response.success(req, res, "Error", 400);
+        response.error(req, res, "Error", 400);
     })
 });
 
