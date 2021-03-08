@@ -5,7 +5,7 @@ const router = require('../network/routes');
 
 const app = express();
 
-//app.use(cors());
+app.use(cors())
 app.use(express.json());
 
 router(app);

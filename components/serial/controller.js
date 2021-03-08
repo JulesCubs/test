@@ -1,16 +1,16 @@
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 const os = require('os');
+const fs = require('fs');
 
-function getSerial (message) {
+function postSerial () {
     return new Promise ((resolve, reject) => {
-        if(!message) {
+        /*if(!message) {
             console.log("Error en el mensaje");
             reject('Error en la solicitud');
             return false;
-        }
+        }*/
 
         const fullMsg = {
-            message: message,
             date: new Date(),
             so: os.platform(),
             arch: os.arch(),
@@ -34,7 +34,7 @@ function getSerial (message) {
                 comand = 'system_profiler SPHardwareDataType | grep Serial';
                 break;
         }
-            
+        
         exec(comand, (error, stdout, stderr) => {
             if (error) {
                 console.error(`error: ${error.message}`);
@@ -45,8 +45,8 @@ function getSerial (message) {
                 return;
             }
 
-            console.log(`${stdout}`);
-    
+            console.log(`${stdout}`)
+            
         });
         
         resolve(fullMsg);
@@ -55,5 +55,5 @@ function getSerial (message) {
 }
             
 module.exports = {
-    getSerial
+    postSerial
 }

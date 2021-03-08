@@ -4,9 +4,9 @@ const controller = require('./controller');
 
 const router = express.Router();
 
-router.get('/', function (req, res){
+router.post('/', function (req, res){
 
-    controller.getSerial(req.body.message)
+    controller.postSerial(req.query)
     .then ((fullMsg) => {
         response.success(req, res, fullMsg, 200);
     })
